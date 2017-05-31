@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,13 +82,60 @@ public class AuditFromRepository
             auditQuestion.setAuditd(resultSet.getInt("Audit_Id"));
             auditQuestion.setQuetionId(resultSet.getInt("Question_Id"));
             auditQuestion.setQuestion(resultSet.getString("Question_Description"));
-            auditQuestion.setComplianceStatus(resultSet.getString("status"));
-            auditQuestion.setRemark(resultSet.getString("Remarks"));
+            auditQuestion.setComplianceStatus(resultSet.getInt("Compliance_Id"));
+            //auditQuestion.setRemark(resultSet.getString("Remarks"));
+            auditQuestion.setProjectId(resultSet.getInt("Project_Code"));
+            auditQuestion.setWeightage(resultSet.getInt("Weightage"));
 
             auditQuestionsList.add(auditQuestion);
         }
 
         return auditQuestionsList;
+    }
+
+    public int submitForm (List<AuditQuestions> auditQuestions) throws SQLException
+    {
+
+        PreparedStatement preparedStatement;
+
+        int rowsUpdated = 0;
+        int nonCompliantScore = 0;
+        int compliantScore = 0;
+
+
+        for (AuditQuestions auditQuestion : auditQuestions)
+        {
+            if (auditQuestion.getComplianceStatus() == 201)
+            {
+                compliantScore += auditQuestion.getWeightage();
+            }
+            else if (auditQuestion.getComplianceStatus() == 202)
+            {
+                nonCompliantScore += auditQuestion.getWeightage();
+            }
+
+            String sql = "insert into ProjectAudit values (?,?,?,?,?)";
+            preparedStatement = this.connection.prepareStatement(sql);
+            preparedStatement.setInt(1, auditQuestion.getAuditd());
+            preparedStatement.setInt(2, auditQuestion.getProjectId());
+            preparedStatement.setInt(3, auditQuestion.getQuetionId());
+            preparedStatement.setInt(4, auditQuestion.getComplianceStatus());
+            preparedStatement.setString(5, auditQuestion.getQuestion());
+
+            rowsUpdated += preparedStatement.executeUpdate();
+        }
+
+        int total = nonCompliantScore + compliantScore;
+        float percentage = ((compliantScore * 100) / (total == 0 ? 1 : total));
+
+        int auditId = auditQuestions.stream().findFirst().get().getAuditd();
+
+        String sql = String.format("update AuditTimeTable set Compliance_Score=%s where Audit_Id=%s", percentage, auditId);
+
+        preparedStatement = this.connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+
+        return rowsUpdated;
     }
 
 }

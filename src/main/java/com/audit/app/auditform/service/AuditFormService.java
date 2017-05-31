@@ -38,4 +38,9 @@ public class AuditFormService
     {
         return this.auditFromRepository.getAllQuestions(projectId);
     }
+
+    public int submitForm (List<AuditQuestions> auditQuestions) throws SQLException
+    {
+        return this.auditFromRepository.submitForm(auditQuestions);
+    }
 }

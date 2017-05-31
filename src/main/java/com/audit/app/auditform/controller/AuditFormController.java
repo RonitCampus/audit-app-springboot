@@ -48,4 +48,11 @@ public class AuditFormController
         return new ResponseEntity<List<AuditQuestions>>(this.auditFormService.getAllQuestions(projectId), HttpStatus.OK);
     }
 
+    @PostMapping ("/submit")
+    public ResponseEntity<Integer> submitForm (@RequestBody List<AuditQuestions> auditQuestions) throws SQLException
+    {
+        int rowsUpdated = this.auditFormService.submitForm(auditQuestions);
+        return new ResponseEntity<>(rowsUpdated, HttpStatus.OK);
+    }
+
 }

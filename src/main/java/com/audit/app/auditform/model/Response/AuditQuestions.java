@@ -14,8 +14,10 @@ public class AuditQuestions
     private int auditd;
     private int quetionId;
     private String question;
-    private String ComplianceStatus;
+    private int ComplianceStatus;
     private String remark;
+    private int projectId;
+    private int weightage;
 
 
     public int getAuditd ()
@@ -48,12 +50,12 @@ public class AuditQuestions
         this.question = question;
     }
 
-    public String getComplianceStatus ()
+    public int getComplianceStatus ()
     {
         return ComplianceStatus;
     }
 
-    public void setComplianceStatus (final String complianceStatus)
+    public void setComplianceStatus (final int complianceStatus)
     {
         ComplianceStatus = complianceStatus;
     }
@@ -68,6 +70,26 @@ public class AuditQuestions
         this.remark = remark;
     }
 
+    public int getProjectId ()
+    {
+        return projectId;
+    }
+
+    public void setProjectId (final int projectId)
+    {
+        this.projectId = projectId;
+    }
+
+    public int getWeightage ()
+    {
+        return weightage;
+    }
+
+    public void setWeightage (final int weightage)
+    {
+        this.weightage = weightage;
+    }
+
     @Override
     public String toString ()
     {
@@ -75,8 +97,10 @@ public class AuditQuestions
                 "auditd=" + auditd +
                 ", quetionId=" + quetionId +
                 ", question='" + question + '\'' +
-                ", ComplianceStatus='" + ComplianceStatus + '\'' +
+                ", ComplianceStatus=" + ComplianceStatus +
                 ", remark='" + remark + '\'' +
+                ", projectId=" + projectId +
+                ", weightage=" + weightage +
                 '}';
     }
 }

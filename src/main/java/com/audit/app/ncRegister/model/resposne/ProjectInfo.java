@@ -1,4 +1,4 @@
-package com.audit.app.auditform.model.Response;
+package com.audit.app.ncRegister.model.resposne;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -11,15 +11,17 @@ import java.sql.Date;
  */
 @Component
 @Scope (BeanDefinition.SCOPE_PROTOTYPE)
-public class Project
+public class ProjectInfo
 {
-    private int id;
+    private Integer id;
+    private Integer auditId;
     private String name;
-    private String projectMgr;
     private Date scheduledOn;
     private Date conductedOn;
     private String auditor;
     private String auditee;
+    private String remark;
+    private boolean status;
 
     public int getId ()
     {
@@ -39,16 +41,6 @@ public class Project
     public void setName (final String name)
     {
         this.name = name;
-    }
-
-    public String getProjectMgr ()
-    {
-        return projectMgr;
-    }
-
-    public void setProjectMgr (final String projectMgr)
-    {
-        this.projectMgr = projectMgr;
     }
 
     public Date getScheduledOn ()
@@ -91,17 +83,49 @@ public class Project
         this.auditee = auditee;
     }
 
+    public int getAuditId ()
+    {
+        return auditId;
+    }
+
+    public void setAuditId (final int auditId)
+    {
+        this.auditId = auditId;
+    }
+
+    public String getRemark ()
+    {
+        return remark;
+    }
+
+    public void setRemark (final String remark)
+    {
+        this.remark = remark;
+    }
+
+    public boolean isStatus ()
+    {
+        return status;
+    }
+
+    public void setStatus (final boolean status)
+    {
+        this.status = status;
+    }
+
     @Override
     public String toString ()
     {
         return "Project{" +
                 "id=" + id +
+                ", auditId=" + auditId +
                 ", name='" + name + '\'' +
-                ", projectMgr='" + projectMgr + '\'' +
                 ", scheduledOn=" + scheduledOn +
                 ", conductedOn=" + conductedOn +
                 ", auditor='" + auditor + '\'' +
                 ", auditee='" + auditee + '\'' +
+                ", remark='" + remark + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

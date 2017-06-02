@@ -54,7 +54,7 @@ public class AuditFromRepository
     public List<Project> getAllProjects () throws SQLException
     {
         Statement statement = this.connection.createStatement();
-        String sql = "select Project_Code , Project_name from ProjectMaster";
+        String sql = "select pm.Project_Code, pm.Project_Name, pm.Project_Mgr, att.Schedule_On, att.Conducted_On, att.Auditor, att.Auditee from ProjectMaster as pm , AuditDB.dbo.AuditTimeTable as att where pm.Project_Code = att.Project_Code";
 
         ResultSet resultSet = statement.executeQuery(sql);
         List<Project> projectList = new ArrayList<>();
@@ -64,6 +64,12 @@ public class AuditFromRepository
             Project project = this.applicationContext.getBean(Project.class);
             project.setId(resultSet.getInt("Project_Code"));
             project.setName(resultSet.getString("Project_name"));
+            project.setProjectMgr(resultSet.getString("Project_Mgr"));
+            project.setAuditor(resultSet.getString("Auditor"));
+            project.setAuditee(resultSet.getString("Auditee"));
+            project.setScheduledOn(resultSet.getDate("Schedule_On"));
+            project.setConductedOn(resultSet.getDate("Conducted_On"));
+
             projectList.add(project);
         }
         return projectList;
@@ -121,6 +127,7 @@ public class AuditFromRepository
             preparedStatement.setInt(3, auditQuestion.getQuetionId());
             preparedStatement.setInt(4, auditQuestion.getComplianceStatus());
             preparedStatement.setString(5, auditQuestion.getQuestion());
+            //add date time stamp here
 
             rowsUpdated += preparedStatement.executeUpdate();
         }
@@ -137,5 +144,6 @@ public class AuditFromRepository
 
         return rowsUpdated;
     }
+
 
 }

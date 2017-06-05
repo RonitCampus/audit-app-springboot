@@ -1,7 +1,7 @@
 package com.audit.app.questionbank.controller;
 
 import com.audit.app.questionbank.models.Request.CreateNewQuestion;
-import com.audit.app.questionbank.models.Response.QuestionCategory;
+import com.audit.app.questionbank.models.Response.QuestionCategoryInfo;
 import com.audit.app.questionbank.service.QuestionBankService;
 import org.apache.commons.logging.impl.SLF4JLog;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class QuestionBankController
 
 
     @GetMapping ("/get-categories")
-    public ResponseEntity<List<QuestionCategory>> getCategories () throws SQLException
+    public ResponseEntity<List<QuestionCategoryInfo>> getCategories () throws SQLException
     {
         return new ResponseEntity<>(this.questionBankService.getCategories(), HttpStatus.OK);
     }

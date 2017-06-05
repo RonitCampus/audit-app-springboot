@@ -1,4 +1,4 @@
-package com.audit.app.questionbank.models.Response;
+package com.audit.app.Admin_Services._Data_Forms.CreateDeleteQuestionCategory.model;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -11,17 +11,17 @@ import org.springframework.stereotype.Component;
 @Scope (BeanDefinition.SCOPE_PROTOTYPE)
 public class QuestionCategory
 {
-    private int cateoryId;
+    private int questionCategoryId;
     private String questionDescription;
 
-    public int getCateoryId ()
+    public int getQuestionCategoryId ()
     {
-        return cateoryId;
+        return questionCategoryId;
     }
 
-    public void setCateoryId (final int cateoryId)
+    public void setQuestionCategoryId (final int questionCategoryId)
     {
-        this.cateoryId = cateoryId;
+        this.questionCategoryId = questionCategoryId;
     }
 
     public String getQuestionDescription ()
@@ -38,7 +38,7 @@ public class QuestionCategory
     public String toString ()
     {
         return "QuestionCategory{" +
-                "cateoryId=" + cateoryId +
+                "questionCategoryId='" + questionCategoryId + '\'' +
                 ", questionDescription='" + questionDescription + '\'' +
                 '}';
     }

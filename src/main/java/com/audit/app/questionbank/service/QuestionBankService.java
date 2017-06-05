@@ -1,7 +1,7 @@
 package com.audit.app.questionbank.service;
 
 import com.audit.app.questionbank.models.Request.CreateNewQuestion;
-import com.audit.app.questionbank.models.Response.QuestionCategory;
+import com.audit.app.questionbank.models.Response.QuestionCategoryInfo;
 import com.audit.app.questionbank.repository.QuestionBankRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class QuestionBankService
         this.questionBankRepository = questionBankRepository;
     }
 
-    public List<QuestionCategory> getCategories () throws SQLException
+    public List<QuestionCategoryInfo> getCategories () throws SQLException
     {
         return this.questionBankRepository.getCategories();
     }

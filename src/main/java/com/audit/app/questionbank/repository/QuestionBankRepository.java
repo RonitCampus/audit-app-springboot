@@ -2,7 +2,7 @@ package com.audit.app.questionbank.repository;
 
 import com.audit.app.Db.DbConfig;
 import com.audit.app.questionbank.models.Request.CreateNewQuestion;
-import com.audit.app.questionbank.models.Response.QuestionCategory;
+import com.audit.app.questionbank.models.Response.QuestionCategoryInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
@@ -27,26 +27,26 @@ public class QuestionBankRepository
         Connection connection = this.connection = DbConfig.getInstance();
     }
 
-    public List<QuestionCategory> getCategories () throws SQLException
+    public List<QuestionCategoryInfo> getCategories () throws SQLException
     {
         Statement statement = connection.createStatement();
         String sql = "select * from QuestionCategory";
 
         ResultSet resultSet = statement.executeQuery(sql);
 
-        List<QuestionCategory> questionCategoryList = new ArrayList<>();
+        List<QuestionCategoryInfo> questionCategoryInfoList = new ArrayList<>();
 
         while (resultSet.next())
         {
-            QuestionCategory questionCategory = this.applicationContext.getBean(QuestionCategory.class);
+            QuestionCategoryInfo questionCategoryInfo = this.applicationContext.getBean(QuestionCategoryInfo.class);
 
-            questionCategory.setCateoryId(resultSet.getInt("Question_Category_Id"));
-            questionCategory.setQuestionDescription(resultSet.getString("Question_Description"));
+            questionCategoryInfo.setCateoryId(resultSet.getInt("Question_Category_Id"));
+            questionCategoryInfo.setQuestionDescription(resultSet.getString("Question_Description"));
 
-            questionCategoryList.add(questionCategory);
+            questionCategoryInfoList.add(questionCategoryInfo);
         }
 
-        return questionCategoryList;
+        return questionCategoryInfoList;
 
     }
 

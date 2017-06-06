@@ -54,7 +54,7 @@ public class AuditFromRepository
     public List<Project> getAllProjects () throws SQLException
     {
         Statement statement = this.connection.createStatement();
-        String sql = "select pm.Project_Code, pm.Project_Name, pm.Project_Mgr, att.Schedule_On, att.Conducted_On, att.Auditor, att.Auditee from ProjectMaster as pm , AuditDB.dbo.AuditTimeTable as att where pm.Project_Code = att.Project_Code";
+        String sql = "select pm.Project_Code, pm.Project_Name, pm.Project_Mgr, att.Scheduled_On, att.Conducted_On, att.Auditor, att.Auditee from ProjectMaster as pm , AuditDB.dbo.AuditTimeTable as att where pm.Project_Code = att.Project_Code";
 
         ResultSet resultSet = statement.executeQuery(sql);
         List<Project> projectList = new ArrayList<>();
@@ -67,7 +67,7 @@ public class AuditFromRepository
             project.setProjectMgr(resultSet.getString("Project_Mgr"));
             project.setAuditor(resultSet.getString("Auditor"));
             project.setAuditee(resultSet.getString("Auditee"));
-            project.setScheduledOn(resultSet.getDate("Schedule_On"));
+            project.setScheduledOn(resultSet.getDate("Scheduled_On"));
             project.setConductedOn(resultSet.getDate("Conducted_On"));
 
             projectList.add(project);
@@ -88,7 +88,7 @@ public class AuditFromRepository
             auditQuestion.setAuditd(resultSet.getInt("Audit_Id"));
             auditQuestion.setQuetionId(resultSet.getInt("Question_Id"));
             auditQuestion.setQuestion(resultSet.getString("Question_Description"));
-            auditQuestion.setComplianceStatus(resultSet.getInt("Compliance_Id"));
+            auditQuestion.setComplianceStatus(resultSet.getInt("Compliance_Status"));
             //auditQuestion.setRemark(resultSet.getString("Remarks"));
             auditQuestion.setProjectId(resultSet.getInt("Project_Code"));
             auditQuestion.setWeightage(resultSet.getInt("Weightage"));

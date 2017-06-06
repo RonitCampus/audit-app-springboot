@@ -1,15 +1,13 @@
 package com.audit.app.Admin_Services._Data_Forms.ProjectMaster.repository;
 
+import com.audit.app.Admin_Services._Data_Forms.ProjectMaster.model.ProjectMasterForm;
 import com.audit.app.Admin_Services._Data_Forms.ProjectMaster.model.ProjectType;
 import com.audit.app.Db.DbConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,5 +51,28 @@ public class ProjectMasterRepository
         }
 
         return projectTypeList;
+    }
+
+    public boolean addNewProject (ProjectMasterForm projectMasterForm) throws SQLException
+    {
+
+        String sql = "insert into ProjectMaster values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+        preparedStatement.setString(1, projectMasterForm.getProjectName());
+        preparedStatement.setString(2, projectMasterForm.getProjectMgr());
+        preparedStatement.setString(3, projectMasterForm.getDeliveryMgr());
+        preparedStatement.setString(4, projectMasterForm.getRelationshipMgr());
+        preparedStatement.setString(5, projectMasterForm.getClient());
+        preparedStatement.setString(6, projectMasterForm.getPortfolio());
+        preparedStatement.setDate(7, projectMasterForm.getStartDt());
+        preparedStatement.setDate(8, projectMasterForm.getEndDt());
+        preparedStatement.setInt(9, projectMasterForm.getProjectType());
+        preparedStatement.setInt(10, projectMasterForm.getAssociateCount());
+        preparedStatement.setBoolean(11, projectMasterForm.isProjectActiveStatus());
+        preparedStatement.setString(12, null);
+
+        int rowsUpdated = preparedStatement.executeUpdate();
+
+        return rowsUpdated > 0;
     }
 }

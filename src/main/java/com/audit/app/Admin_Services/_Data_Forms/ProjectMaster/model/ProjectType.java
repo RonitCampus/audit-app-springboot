@@ -37,7 +37,7 @@ public class ProjectType
     @Override
     public String toString ()
     {
-        return "ProjectType{" +
+        return "ProjectTypeMaster{" +
                 "projectType=" + projectType +
                 ", projectTypeDescription='" + projectTypeDescription + '\'' +
                 '}';

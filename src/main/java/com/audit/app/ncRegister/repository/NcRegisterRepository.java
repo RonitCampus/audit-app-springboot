@@ -42,10 +42,10 @@ public class NcRegisterRepository
             projectInfo.setAuditId(resultSet.getInt("Audit_Id"));
             projectInfo.setName(resultSet.getString("Project_Name"));
             projectInfo.setAuditor(resultSet.getString("Auditor"));
-            projectInfo.setScheduledOn(resultSet.getDate("Schedule_on"));
+            projectInfo.setScheduledOn(resultSet.getDate("Scheduled_on"));
             projectInfo.setAuditee(resultSet.getString("Auditee"));
-            projectInfo.setRemark(resultSet.getString("remarks"));
-            projectInfo.setStatus(resultSet.getBoolean("Status"));
+            projectInfo.setRemark(resultSet.getString("remark"));
+            projectInfo.setStatus(resultSet.getBoolean("Compliance_Status"));
         }
 
         return projectInfo;

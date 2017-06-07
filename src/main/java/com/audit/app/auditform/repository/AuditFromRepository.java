@@ -78,7 +78,7 @@ public class AuditFromRepository
     public List<AuditQuestions> getAllQuestions (int projectId) throws SQLException
     {
         Statement statement = this.connection.createStatement();
-        String sql = String.format("select * from QuestionBank as qb, QuestionProject as qp, ProjectMaster pm, AuditTimeTable as att where qb.Question_Id = qp.Question_Id and pm.Project_Code = %s and pm.Project_Type = qp.Project_Type; ", projectId);
+        String sql = String.format("select * from QuestionBank as qb, QuestionProject as qp, ProjectMaster pm, AuditTimeTable as att where qb.Question_Id = qp.Question_Id and pm.Project_Code = %s and att.Project_Code = %s and pm.Project_Type = qp.Project_Type;", projectId, projectId);
 
         ResultSet resultSet = statement.executeQuery(sql);
         List<AuditQuestions> auditQuestionsList = new ArrayList<>();

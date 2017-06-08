@@ -126,7 +126,7 @@ public class AuditFromRepository
             preparedStatement.setInt(2, auditQuestion.getProjectId());
             preparedStatement.setInt(3, auditQuestion.getQuetionId());
             preparedStatement.setInt(4, auditQuestion.getComplianceStatus());
-            preparedStatement.setString(5, auditQuestion.getQuestion());
+            preparedStatement.setString(5, (auditQuestion.getRemark() != null ? auditQuestion.getRemark() : ""));
             //add date time stamp here
 
             rowsUpdated += preparedStatement.executeUpdate();

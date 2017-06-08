@@ -1,5 +1,6 @@
 package com.audit.app.ncRegister.controller;
 
+import com.audit.app.ncRegister.model.request.CreateNcForm;
 import com.audit.app.ncRegister.model.resposne.ProjectInfo;
 import com.audit.app.ncRegister.service.NcRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,11 @@ public class NcRegisterController
     {
         return this.ncRegisterService.getProjectInfo(projectId);
     }
+
+    @PostMapping ("/createNcForm")
+    public boolean createNc (@RequestBody final CreateNcForm createNcForm) throws SQLException
+    {
+        return this.ncRegisterService.createNc(createNcForm);
+    }
+
 }

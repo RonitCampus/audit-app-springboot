@@ -4,7 +4,8 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 /**
  * Created by Infocepts India in 2017.
@@ -13,13 +14,24 @@ import java.util.Date;
 @Scope (BeanDefinition.SCOPE_PROTOTYPE)
 public class UserNcRegisterAuditInfo
 {
+    private int ncId;
     private int auditId;
-    private String name;
-    private String auditor;
-    private String auditee;
-    private String remark;
-    private boolean status;
-    private Date expectedCloseDt;
+    private String projectName;
+    private String raisedBy;
+    private Date expectedCloseDate;
+    private String assignedTo;
+    private String ncDescription;
+    private int ncStatus;
+
+    public int getNcId ()
+    {
+        return ncId;
+    }
+
+    public void setNcId (final int ncId)
+    {
+        this.ncId = ncId;
+    }
 
     public int getAuditId ()
     {
@@ -31,77 +43,78 @@ public class UserNcRegisterAuditInfo
         this.auditId = auditId;
     }
 
-    public String getName ()
+    public String getProjectName ()
     {
-        return name;
+        return projectName;
     }
 
-    public void setName (final String name)
+    public void setProjectName (final String projectName)
     {
-        this.name = name;
+        this.projectName = projectName;
     }
 
-    public String getAuditor ()
+    public String getRaisedBy ()
     {
-        return auditor;
+        return raisedBy;
     }
 
-    public void setAuditor (final String auditor)
+    public void setRaisedBy (final String raisedBy)
     {
-        this.auditor = auditor;
+        this.raisedBy = raisedBy;
     }
 
-    public String getAuditee ()
+    public Date getExpectedCloseDate ()
     {
-        return auditee;
+        return expectedCloseDate;
     }
 
-    public void setAuditee (final String auditee)
+    public void setExpectedCloseDate (final Date expectedCloseDate)
     {
-        this.auditee = auditee;
+        this.expectedCloseDate = expectedCloseDate;
     }
 
-    public String getRemark ()
+    public String getAssignedTo ()
     {
-        return remark;
+        return assignedTo;
     }
 
-    public void setRemark (final String remark)
+    public void setAssignedTo (final String assignedTo)
     {
-        this.remark = remark;
+        this.assignedTo = assignedTo;
     }
 
-    public boolean isStatus ()
+    public String getNcDescription ()
     {
-        return status;
+        return ncDescription;
     }
 
-    public void setStatus (final boolean status)
+    public void setNcDescription (final String ncDescription)
     {
-        this.status = status;
+        this.ncDescription = ncDescription;
     }
 
-    public Date getExpectedCloseDt ()
+    public int getNcStatus ()
     {
-        return expectedCloseDt;
+        return ncStatus;
     }
 
-    public void setExpectedCloseDt (final Date expectedCloseDt)
+    public void setNcStatus (final int ncStatus)
     {
-        this.expectedCloseDt = expectedCloseDt;
+        this.ncStatus = ncStatus;
     }
 
     @Override
     public String toString ()
     {
-        return "NcRegisterAuditInfo{" +
+        return "UserNcRegisterAuditInfo{" +
+                "ncId=" + ncId +
                 ", auditId=" + auditId +
-                ", name='" + name + '\'' +
-                ", auditor='" + auditor + '\'' +
-                ", auditee='" + auditee + '\'' +
-                ", remark='" + remark + '\'' +
-                ", status=" + status +
-                ", expectedCloseDt=" + expectedCloseDt +
+                ", projectName='" + projectName + '\'' +
+                ", raisedBy='" + raisedBy + '\'' +
+                ", expectedCloseDate=" + expectedCloseDate +
+                ", assignedTo='" + assignedTo + '\'' +
+                ", ncDescription='" + ncDescription + '\'' +
+                ", ncStatus=" + ncStatus +
                 '}';
     }
 }

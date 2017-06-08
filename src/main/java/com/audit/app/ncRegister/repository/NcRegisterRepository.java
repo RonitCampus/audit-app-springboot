@@ -1,15 +1,13 @@
 package com.audit.app.ncRegister.repository;
 
 import com.audit.app.Db.DbConfig;
+import com.audit.app.ncRegister.model.request.CreateNcForm;
 import com.audit.app.ncRegister.model.resposne.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by Infocepts India in 2017.
@@ -31,7 +29,7 @@ public class NcRegisterRepository
     public ProjectInfo getProjectInfo (int projectId) throws SQLException
     {
 
-        String sql = String.format("select * from ProjectMaster as pm , AuditDB.dbo.AuditTimeTable as att where pm.Project_Code = %s", projectId);
+        String sql = String.format("  select * from ProjectMaster as pm , AuditDB.dbo.AuditTimeTable as att where pm.Project_Code = %s and att.Project_Code = %s;" , projectId, projectId);
         Statement statement = this.connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -51,4 +49,20 @@ public class NcRegisterRepository
         return projectInfo;
     }
 
+
+    public boolean createNc (final CreateNcForm createNcForm) throws SQLException
+    {
+        String sql = "insert into NcRegister (Audit_Id, Project_Name ,Nc_RaisedBy,Nc_AssignedTo,Nc_Date,Nc_Description,Nc_Status, Expected_CloseDt) values (?,?,?,?,?,?,?,?)";
+
+        PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+        preparedStatement.setInt(1, createNcForm.getAuditId());
+        preparedStatement.setString(2, createNcForm.getProjectName());
+        preparedStatement.setString(3, createNcForm.getRaisedBy());
+        preparedStatement.setString(4, createNcForm.getAssignedTo());
+        preparedStatement.setDate(5, createNcForm.getNcDate());
+        preparedStatement.setString(6, createNcForm.getDescription());
+        preparedStatement.setInt(7, 301);//301 -> assigned to Auditee
+        preparedStatement.setDate(8, createNcForm.getExpectedCloseDate());
+        return preparedStatement.executeUpdate() > 0;
+    }
 }

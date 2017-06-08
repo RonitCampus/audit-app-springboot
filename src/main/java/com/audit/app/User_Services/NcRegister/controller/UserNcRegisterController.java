@@ -1,6 +1,7 @@
 package com.audit.app.User_Services.NcRegister.controller;
 
 import com.audit.app.User_Services.NcRegister.model.UserNcRegisterAuditInfo;
+import com.audit.app.User_Services.NcRegister.model.UserNcUpdate;
 import com.audit.app.User_Services.NcRegister.service.UserNcRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,5 +29,11 @@ public class UserNcRegisterController
     public UserNcRegisterAuditInfo getAuditInfo (@PathVariable ("projectId") int projectId) throws SQLException
     {
         return this.userNcRegisterService.getAuditInfo(projectId);
+    }
+
+    @PostMapping ("/Update")
+    public boolean updateNcRegister (@RequestBody final UserNcUpdate userNcUpdate) throws SQLException
+    {
+        return this.userNcRegisterService.updateNcRegister(userNcUpdate);
     }
 }

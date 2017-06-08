@@ -1,6 +1,7 @@
 package com.audit.app.User_Services.NcRegister.service;
 
 import com.audit.app.User_Services.NcRegister.model.UserNcRegisterAuditInfo;
+import com.audit.app.User_Services.NcRegister.model.UserNcUpdate;
 import com.audit.app.User_Services.NcRegister.repository.UserNcRegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,10 @@ public class UserNcRegisterService
     public UserNcRegisterAuditInfo getAuditInfo (int projectId) throws SQLException
     {
         return this.userNcRegisterRepository.getAuditInfo(projectId);
+    }
+
+    public boolean updateNcRegister (final UserNcUpdate userNcUpdate) throws SQLException
+    {
+        return this.userNcRegisterRepository.updateNcRegister(userNcUpdate);
     }
 }

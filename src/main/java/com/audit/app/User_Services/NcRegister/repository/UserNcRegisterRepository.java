@@ -31,7 +31,7 @@ public class UserNcRegisterRepository
 
     public UserNcRegisterAuditInfo getAuditInfo (int projectId) throws SQLException
     {
-        String sql = String.format("select * from ProjectMaster as pm , AuditDB.dbo.AuditTimeTable as att where pm.Project_Code = %s", projectId);
+        String sql = String.format("select * from AuditDB.dbo.ProjectMaster as pm , AuditDB.dbo.AuditTimeTable as att where pm.Project_Code = %s and att.Project_Code=%s;", projectId, projectId);
 
         Statement statement = this.connection.createStatement();
 
@@ -45,8 +45,8 @@ public class UserNcRegisterRepository
             userNcRegisterAuditInfo.setName(resultSet.getString("Project_Name"));
             userNcRegisterAuditInfo.setAuditee(resultSet.getString("Auditee"));
             userNcRegisterAuditInfo.setAuditor(resultSet.getString("Auditor"));
-            userNcRegisterAuditInfo.setRemark(resultSet.getString("Remarks"));
-            userNcRegisterAuditInfo.setStatus(resultSet.getBoolean("Status"));
+            userNcRegisterAuditInfo.setRemark(resultSet.getString("Remark"));
+            userNcRegisterAuditInfo.setStatus(resultSet.getBoolean("Audit_Complete_Status"));
             //ncRegisterAuditInfo.setExpectedCloseDt();
         }
 

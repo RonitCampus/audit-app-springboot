@@ -22,7 +22,7 @@ public class NcRegisterRepository
     public NcRegisterRepository (ApplicationContext applicationContext) throws SQLException
     {
         this.applicationContext = applicationContext;
-        Connection connection = this.connection = DbConfig.getInstance();
+        this.connection = DbConfig.getInstance();
     }
 
 

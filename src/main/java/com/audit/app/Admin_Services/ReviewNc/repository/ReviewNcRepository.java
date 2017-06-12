@@ -5,7 +5,6 @@ import com.audit.app.Admin_Services.ReviewNc.model.NcInfoUpdateForm;
 import com.audit.app.Db.DbConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
